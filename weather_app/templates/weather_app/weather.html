@@ -1,0 +1,45 @@
+<!-- weather_api/templates/weather_api/weather.html -->
+<html>
+<body>
+    <h2>Weather API</h2>
+    <form method="post" action="{% url 'weather' %}">
+        {% csrf_token %}
+        <label for="city_name">Enter City:</label>
+        <input type="text" id="city_name" name="city_name" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- create table if there is data in response -->
+    {% if temperature_data %}
+        <h3>Weather Forecast</h3>
+        <table border="1">
+            <tr>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Date</th>
+                <th>Max Temperature (K)</th>
+                <th>Min Temperature (K)</th>
+                <th>Max Temperature (°C)</th>
+                <th>Min Temperature (°C)</th>
+            </tr>
+            {% for entry in temperature_data %}
+              {% for day in entry.daily %}
+                <tr>
+                    <td>{{ entry.city }}</td>
+                    <td>{{ entry.state }}</td>
+                    <td>{{ entry.country }}</td>
+                    <td>{{ day.dt }}</td>
+                    <td>{{ day.temp.max }}</td>
+                    <td>{{ day.temp.min }}</td>
+                    <td>{{ day.temp.max_c }}</td>
+                    <td>{{ day.temp.min_c }}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+        </table>
+      {% else %}
+        <h2> {{ message }} </h2>
+    {% endif %}
+</body>
+</html>
