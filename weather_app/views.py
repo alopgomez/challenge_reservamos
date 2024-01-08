@@ -47,5 +47,5 @@ def weather(request):
             return render(request, 'weather_app/weather.html', {"temperature_data": temperature_data})
         else:
             return render(request, 'weather_app/weather.html',
-                          {'success': False, 'message': 'Invalid city name'})
+                          {'success': False, 'message': "{}: {}".format(data['cod'],data['message'])})
     return render(request, 'weather_app/weather.html')

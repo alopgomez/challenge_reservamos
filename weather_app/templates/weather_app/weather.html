@@ -1,10 +1,10 @@
 <html>
 <body>
     <h2>Weather API</h2>
+    <p><em>To use the API, type a city name into the input textbox below and press "Get Weather" to obtain a wheather forecast for matching cities.</em></p>
     <form method="post" action="{% url 'weather' %}">
         {% csrf_token %}
-        <label for="city_name">Enter City:</label>
-        <input type="text" id="city_name" name="city_name" required>
+        <input type="text" id="city_name" name="city_name" style="width: 300px;" placeholder="Enter partial or complete city name" required>
         <button type="submit">Get Weather</button>
     </form>
 
